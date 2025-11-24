@@ -2,6 +2,10 @@
 
 Ini adalah submission untuk penugasan Backend Division OmahTI 2025. Proyek ini adalah RESTful API untuk sistem manajemen kantin digital yang dibangun menggunakan Python, FastAPI, SQLAlchemy, dan PostgreSQL (Supabase).
 
+
+## Dokumentasi Postman Untuk Login dan Register 
+https://gauzamf22-2508967.postman.co/workspace/Muhammad-Gauza-Faliha's-Workspa~6c09f98e-5c2c-44f6-8620-7fcccff11730/collection/49766368-26ad752a-8677-42d4-ba7c-f78f30c9a9aa?action=share&creator=49766368
+
 ## 🌐 Database Connection
 
 API ini terhubung dengan PostgreSQL database yang di-hosting di Supabase.
