@@ -1,11 +1,16 @@
+import sys
+import os
+
+# Tambahkan src ke Python path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from sqlalchemy import Column, Integer, String, ForeignKey, Numeric, TIMESTAMP
 from sqlalchemy.orm import relationship
-from database.db import engine, base
+from database.db import engine, Base  # ← Ganti base jadi Base
 
 # =========================
 # Tabel User
 # =========================
-class User(base):
+class User(Base):  # ← Ganti base jadi Base
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -24,7 +29,7 @@ class User(base):
 # =========================
 # Tabel Kantin
 # =========================
-class Kantin(base):
+class Kantin(Base):  # ← Ganti base jadi Base
     __tablename__ = "kantin"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -39,7 +44,7 @@ class Kantin(base):
 # =========================
 # Tabel Warung
 # =========================
-class Warung(base):
+class Warung(Base):  # ← Ganti base jadi Base
     __tablename__ = "warung"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -57,7 +62,7 @@ class Warung(base):
 # =========================
 # Tabel MenuItem
 # =========================
-class MenuItem(base):
+class MenuItem(Base):  # ← Ganti base jadi Base
     __tablename__ = "menu_items"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -74,7 +79,7 @@ class MenuItem(base):
 # =========================
 # Tabel Order
 # =========================
-class Order(base):
+class Order(Base):  # ← Ganti base jadi Base
     __tablename__ = "orders"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -92,7 +97,7 @@ class Order(base):
 # =========================
 # Tabel OrderItem
 # =========================
-class OrderItem(base):
+class OrderItem(Base):  # ← Ganti base jadi Base
     __tablename__ = "order_items"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -110,7 +115,17 @@ class OrderItem(base):
 # =========================
 if __name__ == "__main__":
     print("Dropping old tables...")
-    base.metadata.drop_all(engine)
+    Base.metadata.drop_all(engine)  # ← Ganti base jadi Base
     print("Creating new tables...")
-    base.metadata.create_all(engine)
+    Base.metadata.create_all(engine)  # ← Ganti base jadi Base
+    print("All tables created successfully!")
+
+# =========================
+# CREATE / DROP TABLE
+# =========================
+if __name__ == "__main__":
+    print("Dropping old tables...")
+    Base.metadata.drop_all(engine)
+    print("Creating new tables...")
+    Base.metadata.create_all(engine)
     print("All tables created successfully!")

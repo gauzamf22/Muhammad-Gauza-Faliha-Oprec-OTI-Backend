@@ -3,7 +3,8 @@ from sqlalchemy.orm import Session
 from ...database.db import get_db
 from ...models.model import User
 from passlib.context import CryptContext
-from jose import JWTError, jwt
+import jwt
+print(jwt.__version__)
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 import os
@@ -11,20 +12,16 @@ from dotenv import load_dotenv
 from ...schemas.login import LoginRequest, LoginResponse
 from ...schemas.users import UserResponse, UserCreate
 
-# OAuth2PasswordBearer, dibuat full sama chatgpt wkw, ga sempettt
-
 load_dotenv()  
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 if not SECRET_KEY:
-    # Fallback for development, but warn
-    SECRET_KEY = "insecure-default-key-change-me"
-    print("WARNING: Using default SECRET_KEY. This is insecure for production!")
+    raise ValueError("SECRET_KEY must be set in environment variables!")  # ✅ Lebih aman
 
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-# Password hashing
+# ✅ Gunakan bcrypt (lebih aman)
 pwd_context = CryptContext(schemes=["sha256_crypt"], deprecated="auto")
 
 router = APIRouter()
@@ -56,17 +53,10 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
-
-    
-    user = get_user_by_email(db, email=email)
-    if user is None:
-        raise credentials_exception
-    return user
-
+   
 
 
 # ====================== AUTH ENDPOINTS ===========================
-
 
 @router.post("/login")
 async def login(login_data: LoginRequest, db: Session = Depends(get_db)):
@@ -83,6 +73,7 @@ async def login(login_data: LoginRequest, db: Session = Depends(get_db)):
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password"
         )
+    
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
         data={"sub": user.email}, expires_delta=access_token_expires
@@ -119,4 +110,3 @@ async def register(user: UserCreate, db: Session = Depends(get_db)):
     db.refresh(db_user)
     
     return db_user
-

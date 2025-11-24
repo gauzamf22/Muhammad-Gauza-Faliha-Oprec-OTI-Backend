@@ -1,3 +1,3 @@
-from .db import base, engine, SessionLocal, get_db
+from .db import Base, engine, SessionLocal, get_db
 
 __all__ = ["base", "engine", "SessionLocal", "get_db"]
