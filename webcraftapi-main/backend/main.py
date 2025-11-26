@@ -27,3 +27,5 @@ app.include_router(authentication.router, prefix="/api", tags=["authentication"]
 @app.get("/")
 async def root():
     return {"message": "vercel anjg, mending big cloud"}
+
+app = app
