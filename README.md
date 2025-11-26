@@ -1,3 +1,11 @@
+## Update API dan Deploy
+muhammad-gauza-faliha-oprec-oti-git-ddbbbf-gauzamf22s-projects.vercel.app
+muhammad-gauza-faliha-oprec-oti-backend-lxahtuzb5.vercel.app
+
+https://muhammad-gauza-faliha-oprec-oti-git-ddbbbf-gauzamf22s-projects.vercel.app
+
+
+
 # Penugasan Backend OmahTI 2025
 
 Ini adalah submission untuk penugasan Backend Division OmahTI 2025. Proyek ini adalah RESTful API untuk sistem manajemen kantin digital yang dibangun menggunakan Python, FastAPI, SQLAlchemy, dan PostgreSQL (Supabase).
